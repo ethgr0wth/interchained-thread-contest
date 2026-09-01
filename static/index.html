@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interchained Thread Contest | X.com Viral Threads Competition</title>
+    <meta name="description" content="Interchained Thread Contest - Submit your viral X.com threads and compete for USDT and ITC crypto prizes. Win up to 50 USDT and 2000 $ITC!">
+    <meta name="keywords" content="interchained, thread contest, X.com, twitter, threads, crypto, USDT, ITC, viral">
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="apple-touch-icon" href="/static/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'x-blue': '#1d9bf0',
+                        'x-dark': '#0f1419',
+                        'x-gray': '#71767b',
+                        'gold': '#d4af37',
+                        'silver': '#c0c0c0',
+                        'bronze': '#cd7f32',
+                        'itc-gold': '#c9a227',
+                        'dark': {
+                            '900': '#0a0a12',
+                            '800': '#0f1018',
+                            '700': '#14151f',
+                            '600': '#1a1b28'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a12 0%, #0f1018 50%, #14151f 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .code-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #6366f1;
+            white-space: pre;
+            overflow: hidden;
+        }
+        .x-watermark {
+            position: fixed;
+            font-size: 300px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.02);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        @media (max-width: 640px) {
+            .container { padding-left: 12px; padding-right: 12px; }
+            .p-6 { padding: 1.25rem !important; }
+            .p-8 { padding: 1.5rem !important; }
+            .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            .trophy-card { padding: 16px !important; }
+            .trophy-gold { font-size: 60px !important; }
+            .trophy-silver, .trophy-bronze { font-size: 50px !important; }
+            .text-5xl { font-size: 2.5rem !important; }
+            .text-2xl { font-size: 1.25rem !important; }
+        }
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #c9a227 0%, #f0d878 50%, #c9a227 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .title-gradient {
+            background: linear-gradient(180deg, #c9a227 0%, #a88620 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 30px rgba(201, 162, 39, 0.3);
+        }
+        .x-blue-text {
+            color: #1d9bf0;
+        }
+        .trophy-card {
+            background: linear-gradient(180deg, rgba(30,30,45,0.9) 0%, rgba(20,20,35,0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .trophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        .trophy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .trophy-gold {
+            background: linear-gradient(180deg, #ffd700 0%, #c9a227 50%, #a88620 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 80px;
+        }
+        .trophy-silver {
+            background: linear-gradient(180deg, #e8e8e8 0%, #c0c0c0 50%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 70px;
+        }
+        .trophy-bronze {
+            background: linear-gradient(180deg, #e8a060 0%, #cd7f32 50%, #a86428 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 70px;
+        }
+        .prize-badge {
+            background: linear-gradient(135deg, rgba(201,162,39,0.2) 0%, rgba(201,162,39,0.1) 100%);
+            border: 1px solid rgba(201,162,39,0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .glow-gold {
+            box-shadow: 0 0 40px rgba(201, 162, 39, 0.3);
+        }
+        .tweet-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .tweet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1d9bf0, #c9a227);
+        }
+        .rank-1 { background: linear-gradient(135deg, #ffd700, #c9a227); }
+        .rank-2 { background: linear-gradient(135deg, #e8e8e8, #c0c0c0); }
+        .rank-3 { background: linear-gradient(135deg, #e8a060, #cd7f32); }
+        .voting-star {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .voting-star:hover {
+            transform: scale(1.2);
+        }
+        .x-icon {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        .float-delay-1 { animation-delay: -2s; }
+        .float-delay-2 { animation-delay: -4s; }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        @keyframes skeleton {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200px 100%;
+            animation: skeleton 1.5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="dark text-white font-sans antialiased">
+    <div class="code-bg">
+const thread = await fetchViral();
+function submitThread(url) {
+  return api.post('/threads', {
+    url, wallets: { usdt, itc }
+  });
+}
+// Interchained Thread Contest
+async function vote(threadId) {
+  await api.vote(threadId);
+}
+const prizes = {
+  first: "50 USDT",
+  second: "2000 $ITC",
+  third: "1500 $ITC"
+};
+// X.com viral threads
+class ThreadContest {
+  constructor() {
+    this.entries = [];
+  }
+}
+    </div>
+    <div class="x-watermark" style="top: 10%; left: -5%;">𝕏</div>
+    <div class="x-watermark" style="top: 50%; right: -10%;">𝕏</div>
+    <div id="app"></div>
+    <script src="/static/app.js?v=9"></script>
+</body>
+</html>

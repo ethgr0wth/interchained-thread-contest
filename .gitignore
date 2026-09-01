@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local runtime state
+.cache/
+.pythonlibs/
+.upm/
+*.rdb
+data/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+
+# Replit/agent-local metadata
+.agents/
+.local/
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,48 @@
+modules = ["python-3.11", "nodejs-20"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["cargo", "libiconv", "libxcrypt", "redis", "rustc"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Viral Threads App"
+
+[[workflows.workflow]]
+name = "Viral Threads App"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "redis-server --daemonize yes && python run.py"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 6379
+externalPort = 3000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["python", "run.py"]
+
+[userenv]
+
+[userenv.production]
+REDIS_URL = "redis://localhost:6379"
